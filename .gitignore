@@ -1,0 +1,14 @@
+#Eclipse Project
+.metadata
+bin/
+tmp/
+*.tmp
+*.bak
+*.swp
+*~.nib
+local.properties
+.settings/
+.loadpath
+.recommenders
+*.mp4
+*renderoutput/
