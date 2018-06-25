@@ -142,10 +142,6 @@ public class MainDisplay implements ActionListener {
 		scoringBar.setScore(redScore, blueScore);
 	}
 	
-	public void setFlags(int[] flagDetails) {
-		scoringBar.setFlags(flagDetails);
-	}
-
 	public void setEliminationTeam(int match, int[] redAlliance, int[] blueAlliance) {
 		cardBracket.setTeam(match, redAlliance, blueAlliance);
 	}
