@@ -15,7 +15,7 @@ public class MatchTimer implements ActionListener {
 
 	private Timer timer;
 
-	private static final int MAX_TIME = 120;
+	private static final int MAX_TIME = 16;
 	private static final int WARNING_TIME = 15;
 	private int timeLeft;
 	private boolean isTimeout = false;

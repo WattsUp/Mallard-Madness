@@ -17,7 +17,7 @@ public class ScoringManager implements ActionListener {
 
 	private int[] counts = new int[16];
 	private int[] score = new int[16];
-	private final int[] value = { 10, 5, 1, 60, 60, 30, 10, 40, 10, 5, 1, 60, 60, 30, 10, 40 };
+	private final int[] value = { 10, 5, 1, 60, 30, 10, 40, 10, 5, 1, 60, 30, 10, 40 };
 
 	private File file;
 
@@ -37,15 +37,11 @@ public class ScoringManager implements ActionListener {
 	}
 
 	public void setCounts(int position, int count) {
-		if (position == 3 || position == 9) {
-			counts[position] = (count >= 2) ? 3 : count;
-		} else {
-			counts[position] = count;
-		}
+		counts[position] = count;
 		score = Utils.productOfArrays(counts, value);
 		System.out.println(Arrays.toString(score));
-		int redScore = Utils.sumOfArray(Arrays.copyOfRange(score, 0, 6), Arrays.copyOfRange(score, 14, 16));
-		int blueScore = Utils.sumOfArray(Arrays.copyOfRange(score, 8, 14), Arrays.copyOfRange(score, 6, 8));
+		int redScore = Utils.sumOfArray(Arrays.copyOfRange(score, 0, 5), Arrays.copyOfRange(score, 12, 14));
+		int blueScore = Utils.sumOfArray(Arrays.copyOfRange(score, 7, 12), Arrays.copyOfRange(score, 5, 7));
 		Tournement.getMainDisplay().setScore(redScore, blueScore);
 	}
 
@@ -53,8 +49,8 @@ public class ScoringManager implements ActionListener {
 		Utils.fillZeros(counts);
 		score = Utils.productOfArrays(counts, value);
 		System.out.println(Arrays.toString(score));
-		int redScore = Utils.sumOfArray(Arrays.copyOfRange(score, 0, 6), Arrays.copyOfRange(score, 14, 16));
-		int blueScore = Utils.sumOfArray(Arrays.copyOfRange(score, 8, 14), Arrays.copyOfRange(score, 6, 8));
+		int redScore = Utils.sumOfArray(Arrays.copyOfRange(score, 0, 5), Arrays.copyOfRange(score, 12, 14));
+		int blueScore = Utils.sumOfArray(Arrays.copyOfRange(score, 7, 12), Arrays.copyOfRange(score, 5, 7));
 		Tournement.getMainDisplay().setScore(redScore, blueScore);
 	}
 
@@ -86,7 +82,7 @@ public class ScoringManager implements ActionListener {
 			try {
 				bw = new BufferedWriter(new FileWriter(file.getAbsolutePath(), true));
 				String line = new String(
-						"Match,Red1,Red2,Blue1,Blue2,Red High Duckling,Red Low Duckling,Red Pen Duckling,Red High Mallard,Red Low Mallard,Red Pen Mallard,Red Minor,Red Major,Blue High Duckling,Blue Low Duckling,Blue Pen Duckling,Blue High Mallard,Blue Low Mallard,Blue Pen Mallard,Blue Minor,Blue Major");
+						"Match,Red1,Red2,Blue1,Blue2,Red High Duckling,Red Low Duckling,Red Pen Duckling,Red Crate Mallard,Red Pen Mallard,Red Minor,Red Major,Blue High Duckling,Blue Low Duckling,Blue Pen Duckling,Blue Crate Mallard,Blue Pen Mallard,Blue Minor,Blue Major");
 				bw.write(line);
 				bw.newLine();
 				bw.flush();
@@ -166,8 +162,7 @@ public class ScoringManager implements ActionListener {
 						if (matchManager.getMatch(lineValues[0]).getTeams()[0] == lineValues[1]) {
 							score = Arrays.copyOfRange(lineValues, 5, lineValues.length);
 							matchManager.setMatch(lineValues[0]);
-							//matchManager.saveScores(getScores(true)[0], getScores(false)[0], getScores(true)[2],
-							//		getScores(false)[2]);
+							matchManager.saveScores(getScores(true), getScores(false));
 							System.out.println(String.format("Loaded scores for match #%2d", lineValues[0]));
 							matchManager.getHighScoreStatus();
 						}
@@ -188,16 +183,15 @@ public class ScoringManager implements ActionListener {
 	 */
 	public int[] getScores(boolean isRed) {
 		int[] scores = new int[4];
-		scores[0] = Utils.sumOfArray(Arrays.copyOfRange(score, isRed ? 0 : 8, isRed ? 6 : 14),
-				Arrays.copyOfRange(score, isRed ? 14 : 6, isRed ? 16 : 8));
-		scores[1] = score[isRed ? 0 : 8];
-		scores[1] += score[isRed ? 1 : 9];
-		scores[1] += score[isRed ? 2 : 10];
-		scores[2] = score[isRed ? 3 : 11];
-		scores[2] += score[isRed ? 4 : 12];
-		scores[2] += score[isRed ? 5 : 13];
-		scores[3] = score[isRed ? 14 : 6];
-		scores[3] += score[isRed ? 15 : 7];
+		scores[0] = Utils.sumOfArray(Arrays.copyOfRange(score, isRed ? 0 : 7, isRed ? 5 : 12),
+				Arrays.copyOfRange(score, isRed ? 12 : 5, isRed ? 14 : 7));
+		scores[1] = score[isRed ? 0 : 7];
+		scores[1] += score[isRed ? 1 : 8];
+		scores[1] += score[isRed ? 2 : 9];
+		scores[2] = score[isRed ? 3 : 10];
+		scores[2] += score[isRed ? 4 : 11];
+		scores[3] = score[isRed ? 12 : 5];
+		scores[3] += score[isRed ? 13 : 6];
 		return scores;
 	}
 
