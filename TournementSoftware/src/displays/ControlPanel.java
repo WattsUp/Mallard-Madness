@@ -80,7 +80,7 @@ class ControlPanel {
 		
 		allianceWrapper.setPreferredSize(new Dimension(900, 200));
 
-		mainWrapper.setPreferredSize(new Dimension(1000, 1000));
+		mainWrapper.setPreferredSize(new Dimension(900, 1000));
 
 		startMatch = SwingUtils.button("Start Match", 0, 0, fonts.terminal[fonts.MEDIUM], MatchTimer.getInstance(),
 				cpListener);
