@@ -5,6 +5,7 @@ import java.awt.FlowLayout;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.MediaTracker;
+import java.awt.RenderingHints;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -35,7 +36,7 @@ class Congratulations extends BackgroundPanel {
 		this.setLayout(new FlowLayout(FlowLayout.CENTER, 40, 50));
 
 		mainWrapper = new MainWrapper();
-		logoHolder = SwingUtils.rectangle(1000, 250, CustomColors.CLEAR);
+		logoHolder = SwingUtils.rectangle(1000, 400, CustomColors.CLEAR);
 
 		captainLabel = SwingUtils.label("", CustomColors.BLACK, CustomColors.CLEAR, fonts.scienceFair[fonts.XXX_LARGE],
 				1200, 120, JLabel.CENTER, BorderFactory.createEmptyBorder());
@@ -47,10 +48,10 @@ class Congratulations extends BackgroundPanel {
 
 		mainWrapper.add(SwingUtils.label("Congratulations", CustomColors.BLACK, CustomColors.CLEAR,
 				fonts.terminal[fonts.X_LARGE], 1200, 120, JLabel.CENTER, BorderFactory.createEmptyBorder()));
-		mainWrapper.add(logoHolder);
-		mainWrapper.add(SwingUtils.rectangle(1200, 30, CustomColors.CLEAR));
 		mainWrapper.add(captainLabel);
 		mainWrapper.add(partnerLabel);
+		mainWrapper.add(SwingUtils.rectangle(1200, 30, CustomColors.CLEAR));
+		mainWrapper.add(logoHolder);
 
 		this.add(new JLabel(String.format("%500s", "")));
 		this.add(mainWrapper);
@@ -67,14 +68,17 @@ class Congratulations extends BackgroundPanel {
 		public void paintComponent(Graphics g) {
 			super.paintComponent(g);
 			Graphics2D g2d = (Graphics2D) g;
+			g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+			g2d.setRenderingHint(RenderingHints.KEY_ALPHA_INTERPOLATION,
+					RenderingHints.VALUE_ALPHA_INTERPOLATION_QUALITY);
 
-			float aspect = (float)logoImage.getWidth() / (float)logoImage.getHeight();
+			float aspect = (float) logoImage.getWidth() / (float) logoImage.getHeight();
 			int imageHeight = (int) (logoHolder.getHeight());
 			int imageWidth = (int) (imageHeight * aspect);
-			logoImage = SwingUtils.getScaledImage(logoImage, imageWidth, imageHeight);
-			int imageX = logoHolder.getX();
+			int imageX = this.getWidth() / 2 - imageWidth / 2;
 			int imageY = logoHolder.getY();
-			g2d.drawImage(logoImage, imageX, imageY, null);
+			g2d.drawImage(logoImage, imageX, imageY, imageX + imageWidth, imageY + imageHeight, 0, 0,
+					logoImage.getWidth(), logoImage.getHeight(), null);
 		}
 
 	}
@@ -84,7 +88,7 @@ class Congratulations extends BackgroundPanel {
 	 */
 	private void initializeLogo() {
 		try {
-			logoImage = ImageIO.read(new File("images/2017GameLogo.png"));
+			logoImage = ImageIO.read(new File("images/Logo.png"));
 			MediaTracker tracker = new MediaTracker(this);
 			tracker.addImage(logoImage, 0);
 			tracker.waitForAll();

@@ -7,6 +7,7 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.GridLayout;
 import java.awt.MediaTracker;
+import java.awt.RenderingHints;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -112,6 +113,9 @@ class EliminationBracket extends BackgroundPanel {
 		public void paintComponent(Graphics g) {
 			super.paintComponent(g);
 			Graphics2D g2d = (Graphics2D) g;
+			g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+			g2d.setRenderingHint(RenderingHints.KEY_ALPHA_INTERPOLATION,
+					RenderingHints.VALUE_ALPHA_INTERPOLATION_QUALITY);
 			int gap = 20;
 
 			int line1X1 = semifinalOneMatch.getRightX() + gap;
@@ -127,10 +131,8 @@ class EliminationBracket extends BackgroundPanel {
 			g2d.drawLine(line1X1, line1Y, line1X2, line1Y);
 			g2d.drawLine(line2X, line2Y1, line2X, line2Y2);
 
-			float aspect = (float)logoImage.getWidth() / (float)logoImage.getHeight();
-			int imageWidth = (int) (finalMatch.getWidth() * 0.75);
-			int imageHeight = (int) (imageWidth / aspect);
-			logoImage = SwingUtils.getScaledImage(logoImage, imageWidth, imageHeight);
+			int imageWidth = 279;
+			int imageHeight = 329;
 			int imageX = line2X - imageWidth / 2;
 			int imageY = line1Y - imageHeight / 2;
 			g2d.drawImage(logoImage, imageX, imageY, null);
@@ -142,7 +144,7 @@ class EliminationBracket extends BackgroundPanel {
 	 */
 	private void initializeLogo() {
 		try {
-			logoImage = ImageIO.read(new File("images/LogoSimpleColor.png"));
+			logoImage = ImageIO.read(new File("images/LogoSimple.png"));
 			MediaTracker tracker = new MediaTracker(this);
 			tracker.addImage(logoImage, 0);
 			tracker.waitForAll();
