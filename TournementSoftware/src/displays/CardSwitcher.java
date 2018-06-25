@@ -22,7 +22,7 @@ class CardSwitcher {
 		buttons = new ArrayList<JButton>();
 
 		for (int i = 0; i < cardNames.length; i++) {
-			buttons.add(SwingUtils.button(cardNames[i], 0, 0, fonts.codeNewRoman[fonts.MEDIUM], listener));
+			buttons.add(SwingUtils.button(cardNames[i], 0, 0, fonts.codeNewRoman[fonts.SMALL], listener));
 			switcher.add(buttons.get(i));
 		}
 
@@ -31,8 +31,8 @@ class CardSwitcher {
 		frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		frame.setAlwaysOnTop(true);
 		frame.add(switcher);
-		frame.pack();
 		frame.setVisible(true);
+		frame.pack();
 	}
 
 	public void setLocation(int x, int y) {
