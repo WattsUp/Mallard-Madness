@@ -71,9 +71,14 @@ public class MainDisplay implements ActionListener {
 
 		scoringBar.setLocation(0, 0);
 		frame.setLocation(0, scoringBar.getHeight());
-		cardSwitcher.setLocation(0, scoringBar.getHeight() + frame.getHeight());
+		cardSwitcher.setLocation(0, scoringBar.getHeight());//TODO + frame.getHeight());
 		controlPanel.setLocation(GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice()
 				.getDefaultConfiguration().getBounds().width - controlPanel.getWidth(), 0);
+		
+		scoringBar.repaint();
+		frame.repaint();
+		cardSwitcher.repaint();
+		controlPanel.repaint();
 	}
 
 	private void addCard(JPanel card) {
@@ -137,10 +142,6 @@ public class MainDisplay implements ActionListener {
 		scoringBar.setScore(redScore, blueScore);
 	}
 	
-	public void setFlags(int[] flagDetails) {
-		scoringBar.setFlags(flagDetails);
-	}
-
 	public void setEliminationTeam(int match, int[] redAlliance, int[] blueAlliance) {
 		cardBracket.setTeam(match, redAlliance, blueAlliance);
 	}

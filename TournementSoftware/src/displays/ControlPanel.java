@@ -77,6 +77,8 @@ class ControlPanel {
 		consoleOut = new JTextArea(150, 0);
 		consoleOutWrapper = new JScrollPane(consoleOut);
 		allianceButtons = new ArrayList<JButton>();
+		
+		allianceWrapper.setPreferredSize(new Dimension(900, 200));
 
 		mainWrapper.setPreferredSize(new Dimension(900, 1000));
 
@@ -111,9 +113,9 @@ class ControlPanel {
 		mainWrapper.add(exitTournement);
 
 		frame.add(mainWrapper);
+		frame.setVisible(true);
 		frame.pack();
 		frame.setResizable(false);
-		frame.setVisible(true);
 
 		setAllianceButtonsEnabled(false);
 		startMatch.setEnabled(false);
@@ -126,19 +128,21 @@ class ControlPanel {
 	}
 
 	private void initializeScoringModules() {
-		scoringModules.add(new ScoringModuleButton(0, "Red Flag Balls", CustomColors.RED, 127, 0, true));
-		scoringModules.add(new ScoringModuleScroll(3, "Red Location", CustomColors.RED, 4, 2));
-		scoringModules.add(new ScoringModuleButton(1, "White Flag Balls", CustomColors.BLACK, 127, 0, true));
-		scoringModules.add(new ScoringModuleScroll(4, "White Location", CustomColors.BLACK, 4, 2));
-		scoringModules.add(new ScoringModuleButton(2, "Blue Flag Balls", CustomColors.BLUE, 127, 0, true));
-		scoringModules.add(new ScoringModuleScroll(5, "Blue Location", CustomColors.BLUE, 4, 2));
-
-		scoringModules.add(new ScoringModuleButton(6, "Red Return Home", CustomColors.RED, 2, 0, false));
-		scoringModules.add(new ScoringModuleButton(8, "Red Minor", CustomColors.RED, 127, 0, false));
-		scoringModules.add(new ScoringModuleButton(10, "Red Major", CustomColors.RED, 127, 0, false));
-		scoringModules.add(new ScoringModuleButton(7, "Blue Return Home", CustomColors.BLUE, 2, 0, false));
-		scoringModules.add(new ScoringModuleButton(9, "Blue Minor", CustomColors.BLUE, 127, 0, false));
-		scoringModules.add(new ScoringModuleButton(11, "Blue Major", CustomColors.BLUE, 127, 0, false));
+		scoringModules.add(new ScoringModuleButton(0, "Red High Duckling", CustomColors.RED, 127, 0, true));
+		scoringModules.add(new ScoringModuleButton(1, "Red Low Duckling", CustomColors.RED, 127, 0, true));
+		scoringModules.add(new ScoringModuleButton(2, "Red Pen Duckling", CustomColors.RED, 127, 0, true));
+		scoringModules.add(new ScoringModuleButton(3, "Red Crate Mallard", CustomColors.RED, 2, 0, true));
+		scoringModules.add(new ScoringModuleButton(4, "Red Pen Mallard", CustomColors.RED, 2, 0, true));
+		scoringModules.add(new ScoringModuleButton(5, "Red Minor", CustomColors.RED, 127, 0, false));
+		scoringModules.add(new ScoringModuleButton(6, "Red Major", CustomColors.RED, 127, 0, false));
+		
+		scoringModules.add(new ScoringModuleButton(7, "Blue High Duckling", CustomColors.BLUE, 127, 0, true));
+		scoringModules.add(new ScoringModuleButton(8, "Blue Low Duckling", CustomColors.BLUE, 127, 0, true));
+		scoringModules.add(new ScoringModuleButton(9, "Blue Pen Duckling", CustomColors.BLUE, 127, 0, false));
+		scoringModules.add(new ScoringModuleButton(10, "Blue Crate Mallard", CustomColors.BLUE, 2, 0, true));
+		scoringModules.add(new ScoringModuleButton(11, "Blue Pen Mallard", CustomColors.BLUE, 127, 0, false));
+		scoringModules.add(new ScoringModuleButton(12, "Blue Minor", CustomColors.BLUE, 127, 0, false));
+		scoringModules.add(new ScoringModuleButton(13, "Blue Major", CustomColors.BLUE, 127, 0, false));
 
 		for (ScoringModule module : scoringModules) {
 			module.addActionListener(scoringListener);
@@ -204,8 +208,8 @@ class ControlPanel {
 				consoleOut.setCaretPosition(consoleOut.getDocument().getLength());
 			}
 		});
-//		System.setOut(printStream);
-		// System.setErr(printStream);
+		System.setOut(printStream);
+//		System.setErr(printStream);
 	}
 
 	private void initializeAllianceButtons() {

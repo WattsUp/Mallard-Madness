@@ -3,7 +3,6 @@ package displays;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
-import java.util.ArrayList;
 
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
@@ -15,7 +14,6 @@ import javax.swing.JProgressBar;
 import managers.MatchTimer;
 import utils.CustomColors;
 import utils.Fonts;
-import utils.SwingUtils;
 
 class ScoringBar {
 	private Fonts fonts = Fonts.getInstance();
@@ -24,7 +22,6 @@ class ScoringBar {
 	private JPanel panel;
 	private JPanel lowerWrapper;
 	private JPanel leftWrapper;
-	private JPanel centerWrapper;
 	private JPanel rightWrapper;
 
 	private JProgressBar timerBar;
@@ -36,8 +33,6 @@ class ScoringBar {
 	private JLabel scoreBlueLabel;
 	private JLabel teamsRedLabel;
 	private JLabel teamsBlueLabel;
-	
-	private ArrayList<ZoneDetails> zones;
 
 	private JPanel timerOverlay;
 
@@ -76,21 +71,6 @@ class ScoringBar {
 		leftWrapper.add(teamsRedLabel, BorderLayout.CENTER);
 		leftWrapper.add(scoreRedLabel, BorderLayout.LINE_END);
 		
-		zones = new ArrayList<ZoneDetails>();
-		zones.add(new ZoneDetails(CustomColors.RED));
-		zones.add(new ZoneDetails(CustomColors.PINK));
-		zones.add(new ZoneDetails(CustomColors.WHITE));
-		zones.add(new ZoneDetails(CustomColors.BLUE_PALE));
-		zones.add(new ZoneDetails(CustomColors.BLUE));
-		
-		centerWrapper = new JPanel();
-		centerWrapper.setLayout(new BoxLayout(centerWrapper, BoxLayout.LINE_AXIS));
-		centerWrapper.add(SwingUtils.rectangle(5, 128, CustomColors.BLACK));
-		for(ZoneDetails zone : zones){
-			centerWrapper.add(zone);
-		}
-		centerWrapper.add(SwingUtils.rectangle(5, 128, CustomColors.BLACK));
-		
 		rightWrapper = new JPanel();
 		rightWrapper.setLayout(new BorderLayout(0, 0));
 		rightWrapper.add(teamsBlueLabel, BorderLayout.CENTER);
@@ -100,11 +80,9 @@ class ScoringBar {
 		lowerWrapper.setLayout(null);
 		lowerWrapper.setPreferredSize(new Dimension(1920, 128));
 		lowerWrapper.add(leftWrapper);
-		leftWrapper.setBounds(0, 0, 660, lowerWrapper.getPreferredSize().height);
-		lowerWrapper.add(centerWrapper);
-		centerWrapper.setBounds(660, 0, 600, lowerWrapper.getPreferredSize().height);
+		leftWrapper.setBounds(0, 0, 960, lowerWrapper.getPreferredSize().height);
 		lowerWrapper.add(rightWrapper);
-		rightWrapper.setBounds(1260, 0, 660, lowerWrapper.getPreferredSize().height);
+		rightWrapper.setBounds(960, 0, 960, lowerWrapper.getPreferredSize().height);
 		
 		panel = new JPanel();
 		panel.setPreferredSize(new Dimension(1920, 160));
@@ -134,24 +112,6 @@ class ScoringBar {
 	public void setScore(int redScore, int blueScore) {
 		scoreRedLabel.setText(String.valueOf(redScore));
 		scoreBlueLabel.setText(String.valueOf(blueScore));
-		frame.repaint();
-	}
-
-	/**
-	 * This changes the score label
-	 * 
-	 * @param flagDetails	{redCount, whiteCount, blueCount, redLocation, whiteLocation, blueLocation}
-	 */
-	public void setFlags(int[] flagDetails){
-		int i = zones.size() - 1;
-		for(ZoneDetails zone : zones){
-			int counts[] = {0,0,0};
-			counts[0]	= (i == flagDetails[3])? flagDetails[0] : -1;
-			counts[1]	= (i == flagDetails[4])? flagDetails[1] : -1;
-			counts[2]	= (i == flagDetails[5])? flagDetails[2] : -1;
-			zone.setFlags(counts);
-			i--;
-		}
 		frame.repaint();
 	}
 	

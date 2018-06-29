@@ -162,30 +162,34 @@ public class WebSocketServer extends Thread {
 			eventBody = String.valueOf(body.charAt(body.length() - 1));
 		}
 		ActionEvent e = new ActionEvent(this, 0, eventBody);
-		if (body.contains("red_ball")) {
+		if (body.contains("red_high_duckling")) {
 			Tournement.getMainDisplay().addScoringModuleEvent(0, e);
-		} else if (body.contains("white_ball")) {
-			Tournement.getMainDisplay().addScoringModuleEvent(2, e);
-		} else if (body.contains("blue_ball")) {
-			Tournement.getMainDisplay().addScoringModuleEvent(4, e);
-		} else if (body.contains("red_home")) {
-			Tournement.getMainDisplay().addScoringModuleEvent(6, e);
-		} else if (body.contains("red_minor")) {
-			Tournement.getMainDisplay().addScoringModuleEvent(7, e);
-		} else if (body.contains("red_major")) {
-			Tournement.getMainDisplay().addScoringModuleEvent(8, e);
-		} else if (body.contains("blue_home")) {
-			Tournement.getMainDisplay().addScoringModuleEvent(9, e);
-		} else if (body.contains("blue_minor")) {
-			Tournement.getMainDisplay().addScoringModuleEvent(10, e);
-		} else if (body.contains("blue_major")) {
-			Tournement.getMainDisplay().addScoringModuleEvent(11, e);
-		} else if (body.contains("red_pos")) {
+		} else if (body.contains("red_low_duckling")) {
 			Tournement.getMainDisplay().addScoringModuleEvent(1, e);
-		} else if (body.contains("white_pos")) {
+		} else if (body.contains("red_pen_duckling")) {
+			Tournement.getMainDisplay().addScoringModuleEvent(2, e);
+		} else if (body.contains("red_crate_mallard")) {
 			Tournement.getMainDisplay().addScoringModuleEvent(3, e);
-		} else if (body.contains("blue_pos")) {
+		} else if (body.contains("red_pen_mallard")) {
+			Tournement.getMainDisplay().addScoringModuleEvent(4, e);
+		} else if (body.contains("red_minor")) {
 			Tournement.getMainDisplay().addScoringModuleEvent(5, e);
+		} else if (body.contains("red_major")) {
+			Tournement.getMainDisplay().addScoringModuleEvent(6, e);
+		} else if (body.contains("blue_high_duckling")) {
+			Tournement.getMainDisplay().addScoringModuleEvent(7, e);
+		} else if (body.contains("blue_low_duckling")) {
+			Tournement.getMainDisplay().addScoringModuleEvent(8, e);
+		} else if (body.contains("blue_pen_duckling")) {
+			Tournement.getMainDisplay().addScoringModuleEvent(9, e);
+		} else if (body.contains("blue_crate_mallard")) {
+			Tournement.getMainDisplay().addScoringModuleEvent(10, e);
+		} else if (body.contains("blue_pen_mallard")) {
+			Tournement.getMainDisplay().addScoringModuleEvent(11, e);
+		} else if (body.contains("blue_minor")) {
+			Tournement.getMainDisplay().addScoringModuleEvent(12, e);
+		} else if (body.contains("blue_major")) {
+			Tournement.getMainDisplay().addScoringModuleEvent(13, e);
 		}
 		Tournement.getMainDisplay().repaintAll();
 		reformatWebpage();
@@ -197,19 +201,17 @@ public class WebSocketServer extends Thread {
 		formattedWebpage = formattedWebpage.replace("RHD_VALUE", String.valueOf(counts[0]));
 		formattedWebpage = formattedWebpage.replace("RLD_VALUE", String.valueOf(counts[1]));
 		formattedWebpage = formattedWebpage.replace("RPD_VALUE", String.valueOf(counts[2]));
-		formattedWebpage = formattedWebpage.replace("RHM_VALUE", String.valueOf(counts[3]));
-		formattedWebpage = formattedWebpage.replace("RLM_VALUE", String.valueOf(counts[4]));
-		formattedWebpage = formattedWebpage.replace("RPM_VALUE", String.valueOf(counts[5]));
-		formattedWebpage = formattedWebpage.replace("RMIN_VALUE", String.valueOf(counts[6]));
-		formattedWebpage = formattedWebpage.replace("RMAJ_VALUE", String.valueOf(counts[7]));
-		formattedWebpage = formattedWebpage.replace("BHD_VALUE", String.valueOf(counts[8]));
-		formattedWebpage = formattedWebpage.replace("BLD_VALUE", String.valueOf(counts[9]));
-		formattedWebpage = formattedWebpage.replace("BPD_VALUE", String.valueOf(counts[10]));
-		formattedWebpage = formattedWebpage.replace("BHM_VALUE", String.valueOf(counts[11]));
-		formattedWebpage = formattedWebpage.replace("BLM_VALUE", String.valueOf(counts[12]));
-		formattedWebpage = formattedWebpage.replace("BPM_VALUE", String.valueOf(counts[13]));
-		formattedWebpage = formattedWebpage.replace("BMIN_VALUE", String.valueOf(counts[14]));
-		formattedWebpage = formattedWebpage.replace("BMAJ_VALUE", String.valueOf(counts[15]));
+		formattedWebpage = formattedWebpage.replace("RCM_VALUE", String.valueOf(counts[3]));
+		formattedWebpage = formattedWebpage.replace("RPM_VALUE", String.valueOf(counts[4]));
+		formattedWebpage = formattedWebpage.replace("RMIN_VALUE", String.valueOf(counts[5]));
+		formattedWebpage = formattedWebpage.replace("RMAJ_VALUE", String.valueOf(counts[6]));
+		formattedWebpage = formattedWebpage.replace("BHD_VALUE", String.valueOf(counts[7]));
+		formattedWebpage = formattedWebpage.replace("BLD_VALUE", String.valueOf(counts[8]));
+		formattedWebpage = formattedWebpage.replace("BPD_VALUE", String.valueOf(counts[9]));
+		formattedWebpage = formattedWebpage.replace("BCM_VALUE", String.valueOf(counts[10]));
+		formattedWebpage = formattedWebpage.replace("BPM_VALUE", String.valueOf(counts[11]));
+		formattedWebpage = formattedWebpage.replace("BMIN_VALUE", String.valueOf(counts[12]));
+		formattedWebpage = formattedWebpage.replace("BMAJ_VALUE", String.valueOf(counts[13]));
 		this.formattedWebpage = formattedWebpage;
 	}
 
@@ -221,11 +223,11 @@ public class WebSocketServer extends Thread {
 		for (Team team : teams) {
 			formattedWebpage = formattedWebpage.replaceFirst("NUMBER", String.valueOf(team.getNumber()));
 			formattedWebpage = formattedWebpage.replaceFirst("NAME", team.getName());
-			formattedWebpage = formattedWebpage.replaceFirst("SCORE", String.valueOf(team.getAverageScore()));
-			formattedWebpage = formattedWebpage.replaceFirst("DUCKLING", String.valueOf(team.getAverageDuckling()));
-			formattedWebpage = formattedWebpage.replaceFirst("MALLARD", String.valueOf(team.getAverageMallard()));
-			formattedWebpage = formattedWebpage.replaceFirst("FOUL", String.valueOf(team.getAverageFouls()));
-			formattedWebpage = formattedWebpage.replaceFirst("MAX", String.valueOf(team.getMaxScore()));
+			formattedWebpage = formattedWebpage.replaceFirst("SCORE", String.format("%5.1f", team.getAverageScore()));
+			formattedWebpage = formattedWebpage.replaceFirst("DUCKLING", String.format("%5.1f", team.getAverageDuckling()));
+			formattedWebpage = formattedWebpage.replaceFirst("MALLARD", String.format("%5.1f", team.getAverageMallard()));
+			formattedWebpage = formattedWebpage.replaceFirst("FOUL", String.format("%5.1f", team.getAverageFouls()));
+			formattedWebpage = formattedWebpage.replaceFirst("MAX", String.format("%3d", team.getMaxScore()));
 		}
 		// System.out.println(formattedWebpage);
 		this.formattedWebpageRanking = formattedWebpage;

@@ -21,7 +21,7 @@ class Logo extends BackgroundPanel {
 	public Logo() {
 		this.setLayout(null);
 		try {
-			logoImage = ImageIO.read(new File("images/2017GameLogo.png"));
+			logoImage = ImageIO.read(new File("images/Logo.png"));
 			MediaTracker tracker = new MediaTracker(this);
 			tracker.addImage(logoImage, 0);
 			tracker.waitForAll();
@@ -32,6 +32,8 @@ class Logo extends BackgroundPanel {
 		float aspect = (float)logoImage.getHeight() / (float)logoImage.getWidth();
 		int width = this.getPreferredSize().width * 4 / 5;
 		int height = (int) (width * aspect);
+		height = Math.min(height, this.getPreferredSize().height * 4 /5);
+		width = (int) (height / aspect);
 		logoImage = SwingUtils.getScaledImage(logoImage, width, height);
 		
 	}

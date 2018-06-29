@@ -6,6 +6,7 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics2D;
 import java.awt.Image;
+import java.awt.RenderingHints;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 
@@ -142,9 +143,12 @@ public class SwingUtils {
 	 */
 	public static BufferedImage getScaledImage(Image srcImg, int w, int h) {
 		BufferedImage resizedImg = new BufferedImage(w, h, BufferedImage.TRANSLUCENT);
-		Graphics2D g2 = resizedImg.createGraphics();
-		g2.drawImage(srcImg.getScaledInstance(w, h, Image.SCALE_SMOOTH), 0, 0, null);
-		g2.dispose();
+		Graphics2D g2d = resizedImg.createGraphics();
+		g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+		g2d.setRenderingHint(RenderingHints.KEY_ALPHA_INTERPOLATION,
+				RenderingHints.VALUE_ALPHA_INTERPOLATION_QUALITY);
+		g2d.drawImage(srcImg.getScaledInstance(w, h, Image.SCALE_SMOOTH), 0, 0, null);
+		g2d.dispose();
 		return resizedImg;
 	}
 	

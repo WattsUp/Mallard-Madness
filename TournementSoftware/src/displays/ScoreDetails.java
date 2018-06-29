@@ -17,8 +17,8 @@ import utils.SwingUtils;
 class ScoreDetails extends JPanel {
 	private Fonts fonts = Fonts.getInstance();
 
-	private JLabel pointsFlags;
-	private JLabel pointsHome;
+	private JLabel pointsDucklings;
+	private JLabel pointsMallards;
 	private JLabel pointsFouls;
 	private JLabel header;
 	private JLabel infoTeamHeaderFirst;
@@ -51,9 +51,9 @@ class ScoreDetails extends JPanel {
 		header = new JLabel();
 		infoTeamWrapper = new JPanel();
 
-		pointsFlags = SwingUtils.label("0", color, CustomColors.CLEAR, fonts.terminal[fonts.X_LARGE], 100, 65,
+		pointsDucklings = SwingUtils.label("0", color, CustomColors.CLEAR, fonts.terminal[fonts.X_LARGE], 100, 65,
 				JLabel.LEFT, BorderFactory.createEmptyBorder());
-		pointsHome = SwingUtils.label("0", color, CustomColors.CLEAR, fonts.terminal[fonts.X_LARGE], 100, 65,
+		pointsMallards = SwingUtils.label("0", color, CustomColors.CLEAR, fonts.terminal[fonts.X_LARGE], 100, 65,
 				JLabel.LEFT, BorderFactory.createEmptyBorder());
 		pointsFouls = SwingUtils.label("0", color, CustomColors.CLEAR, fonts.terminal[fonts.X_LARGE], 100, 65,
 				JLabel.LEFT, BorderFactory.createEmptyBorder());
@@ -98,12 +98,12 @@ class ScoreDetails extends JPanel {
 		this.add(infoTeamWrapper);
 		this.add(new JLabel(String.format("%100s", "")));
 		this.add(new JLabel(String.format("%100s", "")));
-		this.add(SwingUtils.label("Flags & Balls:", color, CustomColors.CLEAR, fonts.terminal[fonts.X_LARGE], 400, 65,
+		this.add(SwingUtils.label("Ducklings:", color, CustomColors.CLEAR, fonts.terminal[fonts.X_LARGE], 400, 65,
 				JLabel.RIGHT, BorderFactory.createEmptyBorder()));
-		this.add(pointsFlags);
-		this.add(SwingUtils.label("Return Home:", color, CustomColors.CLEAR, fonts.terminal[fonts.X_LARGE], 400, 65,
+		this.add(pointsDucklings);
+		this.add(SwingUtils.label("Mallards:", color, CustomColors.CLEAR, fonts.terminal[fonts.X_LARGE], 400, 65,
 				JLabel.RIGHT, BorderFactory.createEmptyBorder()));
-		this.add(pointsHome);
+		this.add(pointsMallards);
 		this.add(SwingUtils.label((isRed) ? "Blue Penalty:" : "Red Penalty:", color, CustomColors.CLEAR,
 				fonts.terminal[fonts.X_LARGE], 400, 65, JLabel.RIGHT, BorderFactory.createEmptyBorder()));
 		this.add(pointsFouls);
@@ -132,8 +132,8 @@ class ScoreDetails extends JPanel {
 	 *            {Flags, Home, Fouls}
 	 */
 	public void setDetails(String[] teamInfo, int[] scores) {
-		pointsFlags.setText(String.valueOf(scores[0]));
-		pointsHome.setText(String.valueOf(scores[1]));
+		pointsDucklings.setText(String.valueOf(scores[0]));
+		pointsMallards.setText(String.valueOf(scores[1]));
 		pointsFouls.setText(String.valueOf(scores[2]));
 		infoTeamHeaderFirst.setText(teamInfo[0]);
 		infoTeam1First.setText(teamInfo[1]);

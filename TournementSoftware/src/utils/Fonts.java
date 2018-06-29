@@ -34,11 +34,12 @@ public class Fonts {
 	private Fonts() {
 		try {
 			GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
-			ge.registerFont(Font.createFont(Font.TYPE1_FONT, new File("Science Fair.otf")));
+			ge.registerFont(Font.createFont(Font.TRUETYPE_FONT, new File("Science Fair.ttf")));
 			ge.registerFont(Font.createFont(Font.TRUETYPE_FONT, new File("DECTerminalModern.ttf")));
-			ge.registerFont(Font.createFont(Font.TYPE1_FONT, new File("Code New Roman.otf")));
+			ge.registerFont(Font.createFont(Font.TRUETYPE_FONT, new File("Code New Roman.ttf")));
 			System.out.println(Arrays.toString(ge.getAvailableFontFamilyNames()));
 		} catch (IOException | FontFormatException e) {
+			e.printStackTrace();
 		}
 
 		terminal[SMALL] = new Font("DEC Terminal Modern", Font.PLAIN, 16);
