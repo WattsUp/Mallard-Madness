@@ -117,6 +117,17 @@ class TeamList extends JPanel {
 			averageScoreLabel.setText(averageScore);
 			this.repaint();
 		}
+		
+		/**
+		 * Clears the information displayed in Team Detail
+		 */
+		public void clearDetails() {
+			rankLabel.setText("");
+			numberLabel.setText("");
+			nameLabel.setText("");
+			averageScoreLabel.setText("");
+			this.repaint();
+		}
 
 	}
 
@@ -135,7 +146,12 @@ class TeamList extends JPanel {
 	 * @param position
 	 */
 	public void setTeamDetail(Team team, int position) {
-		teamDetails.get(position).setDetails(team.getRank(), team.getNumber(), team.getName(), team.getAverageScore());
+		if(team != null){
+			teamDetails.get(position).setDetails(team.getRank(), team.getNumber(), team.getName(), team.getAverageScore());	
+		}else{
+			teamDetails.get(position).clearDetails();
+		}
+		
 		this.repaint();
 	}
 }
