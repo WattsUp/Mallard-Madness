@@ -78,6 +78,7 @@ class AllianceSelection extends BackgroundPanel {
 
 	/**
 	 * Sets details of a Team Detail
+	 * 
 	 * @param team
 	 * @param position
 	 */
@@ -87,6 +88,7 @@ class AllianceSelection extends BackgroundPanel {
 
 	/**
 	 * Sets a team in the Alliance Grid
+	 * 
 	 * @param teamNumber
 	 * @param position
 	 */
@@ -103,8 +105,12 @@ class AllianceSelection extends BackgroundPanel {
 	}
 
 	public void refreshAvailableList(ArrayList<Team> availableTeams) {
-		for(int i = 0; i < 12; i++){
-			teamList.setTeamDetail(availableTeams.get(i), i);
+		for (int i = 0; i < 12; i++) {
+			if (i < availableTeams.size()) {
+				teamList.setTeamDetail(availableTeams.get(i), i);
+			} else {
+				teamList.setTeamDetail(null, i);
+			}
 		}
 	}
 }
