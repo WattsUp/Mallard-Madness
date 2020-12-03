@@ -1,0 +1,4 @@
+# Mallard Madness #
+This is a robotics game designed for a summer camp for elementary and middle school youth. The object of the game was to collect rubber ducks into bins or a bin. This repository contains rules document, gameplay video, and tournament software.
+
+The tournament software, written in Java, is designed to present live scoring for a video broadcast. Via a remote web interface, a scorekeeper enters the number of rubber ducks collected or penalties incurred and the score automatically updates on an audience display. Teams, playing in two team alliances, earn wins to yield a rank after many qualification matches. Then the software enters alliance selection mode where teams select other teams to play together in the elimination round. Alliances play in an elimination bracket to yield a winning pair.
